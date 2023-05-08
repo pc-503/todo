@@ -16,8 +16,7 @@
      * createTodoメソッド内でbuttonタグのイベントに使用
      * ---------------------------------------------- */
     deleteTodo(id) {
-      const ul = document.getElementById("ul");
-      const todos = ul.children;
+      const todos = this.getTodos();
       for (let todo of todos) {
         if (Number(todo.dataset.id) === id) {
           todo.remove();
@@ -30,8 +29,7 @@
      * createTodoメソッド内でbuttonタグのイベントに使用
      * ---------------------------------------------- */
     editStart(id) {
-      const ul = document.getElementById("ul");
-      const todos = ul.children;
+      const todos = this.getTodos();
       for (let todo of todos) {
         if (Number(todo.dataset.id) === id) {
           // 編集用のinputタグを生成
@@ -57,8 +55,7 @@
      * createTodoメソッド内でbuttonタグのイベントに使用
      * ---------------------------------------------- */
     editComplete(id, content) {
-      const ul = document.getElementById("ul");
-      const todos = ul.children;
+      const todos = this.getTodos();
       for (let todo of todos) {
         if (Number(todo.dataset.id) === id) {
           // 新しく入力したテキストをspanタグへ挿入
@@ -103,6 +100,15 @@
 
       // HTMLタグ生成後にinputタグに入力されている文字をクリアする
       input.value = "";
+    }
+
+    /* ----------------------------------------------
+     * ulタグ内のliタグ取得用のメソッド
+     * ---------------------------------------------- */
+    getTodos() {
+      const ul = document.getElementById("ul");
+      const todos = ul.children;
+      return todos;
     }
   }
 
