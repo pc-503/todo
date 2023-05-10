@@ -96,6 +96,15 @@ class Todo {
     // HTMLタグ生成後にinputタグに入力されている文字をクリアする
     input.value = "";
   }
+  /* ----------------------------------------------
+   * インスタンス生成用のファクトリーメソッド
+   * ---------------------------------------------- */
+  static of(content) {
+    if (content === '') {
+      return;
+    }
+    new Todo(content);
+  }
 
   /* ----------------------------------------------
    * ulタグ内のliタグ取得用のメソッド
@@ -117,5 +126,5 @@ const input = document.getElementById("input");
 const addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  new Todo(input.value);
+  Todo.of(input.value);
 });
