@@ -2,9 +2,9 @@
  * Todo作成用のクラス
  * ---------------------------------------------- */
 export class Todo {
-  constructor(content) {
+  constructor(content, id) {
     this.content = content;
-    this.id = ul.childElementCount;
+    this.id = id;
     this.createTodo();
   }
 
@@ -94,17 +94,32 @@ export class Todo {
     ul.appendChild(li);
 
     // HTMLタグ生成後にinputタグに入力されている文字をクリアする
-    const input = document.getElementById('input');
+    const input = document.getElementById("input");
     input.value = "";
   }
   /* ----------------------------------------------
    * インスタンス生成用のファクトリーメソッド
    * ---------------------------------------------- */
   static of(content) {
+    // テキストが入力されていなかったら何もしない
     if (content === "") {
       return;
     }
-    new Todo(content);
+    // 現在のTodo(liタグ)の数をidとして使用
+    const ul = document.getElementById("ul");
+    const id = ul.childElementCount;
+    // 既存のIDを配列として取得
+    const dataId = [];
+    for (let data of ul.children) {
+        dataId.push(Number(data.dataset.id));
+    }
+    // idがdataIdに存在していたら、dataId内の最大値をインクリメントしてidとして使用
+    if (dataId.includes(id)) {
+      const nextId = Math.max(...dataId) + 1;
+      new Todo(content, nextId);
+    } else {
+      new Todo(content, id);
+    }
   }
 
   /* ----------------------------------------------
