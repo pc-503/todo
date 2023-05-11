@@ -105,14 +105,17 @@ export class Todo {
     if (content === "") {
       return;
     }
+
     // 現在のTodo(liタグ)の数をidとして使用
     const ul = document.getElementById("ul");
     const id = ul.childElementCount;
+
     // 既存のIDを配列として取得
     const dataId = [];
     for (let data of ul.children) {
-        dataId.push(Number(data.dataset.id));
+      dataId.push(Number(data.dataset.id));
     }
+
     // idがdataIdに存在していたら、dataId内の最大値をインクリメントしてidとして使用
     if (dataId.includes(id)) {
       const nextId = Math.max(...dataId) + 1;
